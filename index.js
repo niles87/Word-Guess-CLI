@@ -8,8 +8,12 @@ var bandsToGuess = [
   "harvey danger",
   "beastie boys",
   "the breeders",
+  "avenged sevenfold",
+  "metallica",
+  "sevendust",
+  "better than ezra",
 ];
-var rand = Math.floor(Math.random() * 7);
+var rand = Math.floor(Math.random() * 11);
 var randomBand = new Word(bandsToGuess[rand]);
 var band = [];
 var guessesRemaining = 7;
@@ -48,7 +52,28 @@ function guessPrompt() {
         guessPrompt();
       });
   } else {
-    console.log("Thanks For Playing!");
+    inquirer
+      .prompt([
+        {
+          type: "confirm",
+          message: "Thanks for playing. Would you like to play again?",
+          name: "confirm",
+          default: false,
+        },
+      ])
+      .then(response => {
+        if (response.confirm) {
+          rand = Math.floor(Math.random() * 11);
+          randomBand = new Word(bandsToGuess[rand]);
+          band = [];
+          guessesRemaining = 7;
+          usedLetters = [];
+          randomBand.toString(band);
+          guessPrompt();
+        } else {
+          console.log("Come Back Soon!");
+        }
+      });
   }
 }
 
