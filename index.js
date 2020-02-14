@@ -13,7 +13,7 @@ var bandsToGuess = [
   "sevendust",
   "better than ezra",
 ];
-var rand = Math.floor(Math.random() * 11);
+var rand = Math.floor(Math.random() * 10);
 var randomBand = new Word(bandsToGuess[rand]);
 var band = [];
 var guessesRemaining = 7;
@@ -63,11 +63,7 @@ function guessPrompt() {
       ])
       .then(response => {
         if (response.confirm) {
-          rand = Math.floor(Math.random() * 11);
-          randomBand = new Word(bandsToGuess[rand]);
-          band = [];
-          guessesRemaining = 7;
-          usedLetters = [];
+          resetGame();
           randomBand.toString(band);
           guessPrompt();
         } else {
@@ -76,7 +72,13 @@ function guessPrompt() {
       });
   }
 }
-
+function resetGame() {
+  rand = Math.floor(Math.random() * 10);
+  randomBand = new Word(bandsToGuess[rand]);
+  band = [];
+  guessesRemaining = 7;
+  usedLetters = [];
+}
 function isAlpha(ch) {
   return /^[a-z]$/i.test(ch);
 }
