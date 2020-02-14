@@ -23,7 +23,7 @@ function guessPrompt() {
           name: "letter",
           message: "Guess a Letter",
           validate: input => {
-            if (input !== ("" && /\d/)) {
+            if (input !== "" && isAlpha(input) && !usedLetters.includes(input)) {
               return true;
             } else {
               return false;
@@ -50,6 +50,10 @@ function guessPrompt() {
   } else {
     console.log("Thanks For Playing!");
   }
+}
+
+function isAlpha(ch) {
+  return /^[a-z]$/i.test(ch);
 }
 
 randomBand.toString(band);
