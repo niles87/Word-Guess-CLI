@@ -10,8 +10,8 @@ var bandsToGuess = [
   "the breeders",
   "avenged sevenfold",
   "metallica",
-  "sevendust",
   "better than ezra",
+  "sevendust",
 ];
 var rand = Math.floor(Math.random() * 10);
 var randomBand = new Word(bandsToGuess[rand]);
@@ -19,7 +19,7 @@ var band = [];
 var guessesRemaining = 7;
 var usedLetters = [];
 
-function guessPrompt() {
+var guessPrompt = function() {
   if (guessesRemaining > 0 && randomBand.wordArr.some(el => el.bool === false)) {
     inquirer
       .prompt([
@@ -40,13 +40,13 @@ function guessPrompt() {
           console.log("\nCorrect!!\n");
           randomBand.checkGuess(answer.letter.toLowerCase());
           usedLetters.push(answer.letter.toLowerCase());
-          randomBand.toString(bandsToGuess.slice(randomBand.wordArr.length));
+          randomBand.toString(bandsToGuess.slice(randomBand.wordArr.length + 1));
         } else {
           guessesRemaining--;
           console.log("\nSorry thats incorrect try again.\n");
           randomBand.checkGuess(answer.letter.toLowerCase());
           usedLetters.push(answer.letter.toLowerCase());
-          randomBand.toString(bandsToGuess.slice(randomBand.wordArr.length));
+          randomBand.toString(bandsToGuess.slice(randomBand.wordArr.length + 1));
           console.log("Remaining Guesses:", guessesRemaining);
         }
         guessPrompt();
@@ -71,17 +71,17 @@ function guessPrompt() {
         }
       });
   }
-}
-function resetGame() {
+};
+var resetGame = function() {
   rand = Math.floor(Math.random() * 10);
   randomBand = new Word(bandsToGuess[rand]);
   band = [];
   guessesRemaining = 7;
   usedLetters = [];
-}
-function isAlpha(ch) {
+};
+var isAlpha = function(ch) {
   return /^[a-z]$/i.test(ch);
-}
+};
 
 randomBand.toString(band);
 guessPrompt();
