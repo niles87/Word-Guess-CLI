@@ -5,16 +5,16 @@ var Word = function(str) {
   this.word = str.split("").forEach(element => {
     this.wordArr.push(new Letter(element));
   });
-  this.toString = function(Arr) {
+  this.toString = function(arr) {
     this.wordArr.forEach(element => {
       if (element.character !== " ") {
-        Arr.push(element.displayLetter());
+        arr.push(element.displayLetter());
       } else {
         element.bool = true;
-        Arr.push(element.displayLetter());
+        arr.push(element.displayLetter());
       }
     });
-    console.log(Arr.join(" "));
+    console.log(arr.join(" "));
   };
   this.checkGuess = function(character) {
     this.wordArr.forEach(index => {
