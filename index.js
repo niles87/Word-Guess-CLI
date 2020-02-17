@@ -1,6 +1,8 @@
 var Word = require("./word");
 var inquirer = require("inquirer");
+var colors = require("colors/safe");
 
+colors.enable();
 var bandsToGuess = [
   "third eye blind",
   "red hot chili peppers",
@@ -25,7 +27,7 @@ var guessPrompt = function() {
       .prompt([
         {
           name: "letter",
-          message: "Guess a Letter",
+          message: "Guess a Letter: ",
           validate: input => {
             if (input !== "" && isAlpha(input) && !usedLetters.includes(input)) {
               return true;
@@ -37,17 +39,25 @@ var guessPrompt = function() {
       ])
       .then(answer => {
         if (randomBand.wordArr.some(e => e.character === answer.letter.toLowerCase())) {
-          console.log("\nCorrect!!\n");
+          console.log(colors.bgBrightGreen("\n           "));
+          console.log(colors.bgBrightGreen.black(" Correct!! "));
+          console.log(colors.bgBrightGreen("           \n"));
           randomBand.checkGuess(answer.letter.toLowerCase());
           usedLetters.push(answer.letter.toLowerCase());
           randomBand.toString(bandsToGuess.slice(randomBand.wordArr.length + 1));
         } else {
           guessesRemaining--;
-          console.log("\nSorry thats incorrect try again.\n");
+          console.log(colors.bgYellow("\n                                  "));
+          console.log(colors.bgYellow.black(" Sorry thats incorrect try again. "));
+          console.log(colors.bgYellow("                                  \n"));
           randomBand.checkGuess(answer.letter.toLowerCase());
           usedLetters.push(answer.letter.toLowerCase());
           randomBand.toString(bandsToGuess.slice(randomBand.wordArr.length + 1));
-          console.log("Remaining Guesses:", guessesRemaining);
+          console.log(colors.bgRed("\n                      "));
+          console.log(
+            colors.bgRed.black(" Remaining Guesses: " + colors.bold(guessesRemaining) + " ")
+          );
+          console.log(colors.bgRed("                      \n"));
         }
         guessPrompt();
       });
@@ -67,7 +77,7 @@ var guessPrompt = function() {
           randomBand.toString(band);
           guessPrompt();
         } else {
-          console.log("Come Back Soon!");
+          console.log(colors.underline.brightCyan("\nCome Back Soon!\n"));
         }
       });
   }

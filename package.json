@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/niles87/Word-Guess-CLI#readme",
   "dependencies": {
+    "colors": "^1.4.0",
     "inquirer": "^7.0.4"
   }
 }
