@@ -3,10 +3,10 @@
 ### App Visuals
 
 <p>Word Guessed Correctly</p>
-<img src='images/word_guessed.gif'>
+<p align='center'><img src='images/word_guessed.gif'></p>
 
 <p>Word Not Guessed</p>
-<img src='images/word_not_guessed.gif'>
+<p align='center'><img src='images/word_not_guessed.gif'></p>
 
 ## Overview
 
